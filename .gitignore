@@ -1,0 +1,7 @@
+build/
+*.o
+*.so
+*.a
+*.exe
+__pycache__/
+.cache/
