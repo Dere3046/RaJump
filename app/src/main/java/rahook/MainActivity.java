@@ -11,13 +11,13 @@ public class MainActivity extends Activity {
     static { System.loadLibrary("rahook_jni"); }
 
     private TextView display;
-    private Button[] hk = new Button[4];
-    private boolean[] hkOn = new boolean[4];
+    private TextView resultBox;
 
     private int curA = 0, curB = 0;
     private char curOp = ' ';
     private boolean hasOp = false, hasEq = false;
     private String buf = "0";
+    private boolean isTestRunning = false;
 
     @Override
     protected void onCreate(Bundle s) {
@@ -29,8 +29,6 @@ public class MainActivity extends Activity {
         int pd = dp(12);
         root.setPadding(pd, dp(48), pd, pd);
 
-        root.addView(tv("#00d2ff", 20, "RaHook Calculator", true));
-
         display = new TextView(this);
         display.setTextSize(36);
         display.setTextColor(Color.WHITE);
@@ -41,41 +39,24 @@ public class MainActivity extends Activity {
         display.setText("0");
         root.addView(display);
 
-        LinearLayout hrow = new LinearLayout(this);
-        hrow.setPadding(0, dp(8), 0, dp(8));
-        String[] labels = {"+H", "-H", "\u00d7H", "\u00f7H"};
-        for (int i = 0; i < 4; i++) {
-            final int fi = i;
-            hk[i] = new Button(this);
-            hk[i].setText(labels[i]);
-            hk[i].setTextSize(14);
-            hk[i].setTextColor(Color.WHITE);
-            hk[i].setBackgroundColor(Color.parseColor("#555555"));
-            hk[i].setPadding(dp(4), dp(4), dp(4), dp(4));
-            hk[i].setOnClickListener(v -> toggleHook(fi));
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(40), 1);
-            lp.setMargins(dp(2), 0, dp(2), 0);
-            hrow.addView(hk[i], lp);
-        }
-        root.addView(hrow);
+        Button runBtn = new Button(this);
+        runBtn.setText("Run Tests");
+        runBtn.setTextSize(16);
+        runBtn.setTextColor(Color.WHITE);
+        runBtn.setBackgroundColor(Color.parseColor("#00d2ff"));
+        runBtn.setPadding(dp(8), dp(8), dp(8), dp(8));
+        runBtn.setOnClickListener(v -> runTests());
+        root.addView(runBtn, new LinearLayout.LayoutParams(-1, dp(44)));
 
-        LinearLayout brow = new LinearLayout(this);
-        brow.setPadding(0, 0, 0, dp(8));
-        Button applyAll = new Button(this);
-        applyAll.setText("Apply All");
-        applyAll.setTextSize(14);
-        applyAll.setBackgroundColor(Color.parseColor("#0f3460"));
-        applyAll.setTextColor(Color.WHITE);
-        applyAll.setOnClickListener(v -> { for (int i = 0; i < 4; i++) if (!hkOn[i]) toggleHook(i); });
-        brow.addView(applyAll, new LinearLayout.LayoutParams(0, dp(40), 1));
-        Button restoreAll = new Button(this);
-        restoreAll.setText("Restore All");
-        restoreAll.setTextSize(14);
-        restoreAll.setBackgroundColor(Color.parseColor("#533483"));
-        restoreAll.setTextColor(Color.WHITE);
-        restoreAll.setOnClickListener(v -> { RaHook.nativeUnhookAll(); for (int i = 0; i < 4; i++) { hkOn[i] = false; setHkColor(i); } });
-        brow.addView(restoreAll, new LinearLayout.LayoutParams(0, dp(40), 1));
-        root.addView(brow);
+        resultBox = new TextView(this);
+        resultBox.setTextSize(10);
+        resultBox.setTextColor(Color.parseColor("#00ff88"));
+        resultBox.setPadding(dp(8), dp(8), dp(8), dp(8));
+        resultBox.setBackgroundColor(Color.parseColor("#16213e"));
+        resultBox.setTypeface(Typeface.MONOSPACE);
+        resultBox.setMinLines(3);
+        resultBox.setText("tap Run Tests");
+        root.addView(resultBox, new LinearLayout.LayoutParams(-1, dp(120)));
 
         String[][] keys = {
             {"7","8","9","\u00f7"},
@@ -102,18 +83,27 @@ public class MainActivity extends Activity {
             root.addView(row);
         }
 
-        root.addView(tv("#888888", 12, "RaHook " + RaHook.nativeVersion(), false));
+        root.addView(tv("#555555", 11, "RaHook " + RaHook.nativeVersion(), false));
         setContentView(root);
+    }
+
+    private void runTests() {
+        if (isTestRunning) return;
+        isTestRunning = true;
+        resultBox.setText("testing...");
+        new Thread(() -> {
+            String r = RaHook.nativeRunTests();
+            runOnUiThread(() -> {
+                resultBox.setText(r);
+                isTestRunning = false;
+            });
+        }).start();
     }
 
     private int dp(int n) { return (int)(n * getResources().getDisplayMetrics().density); }
     private TextView tv(String c, int sz, String txt, boolean b) {
         TextView t = new TextView(this); t.setText(txt); t.setTextSize(sz);
         t.setTextColor(Color.parseColor(c)); if(b) t.setTypeface(Typeface.DEFAULT_BOLD); return t;
-    }
-    private void setHkColor(int i) {
-        hk[i].setBackgroundColor(Color.parseColor(hkOn[i] ? "#00d2ff" : "#555555"));
-        hk[i].setTextColor(Color.parseColor(hkOn[i] ? "#1a1a2e" : "#ffffff"));
     }
 
     private int num() { try { return Integer.parseInt(buf); } catch(Exception e) { return 0; } }
@@ -140,18 +130,5 @@ public class MainActivity extends Activity {
         if(hasEq)clear();
         if(buf.equals("0")&&!k.equals("←"))buf=k;else buf+=k;
         display.setText(buf);
-    }
-
-    private void toggleHook(int i) {
-        try {
-            if(hkOn[i]) {
-                if(i==0)RaHook.nativeUnhookAdd(); else if(i==1)RaHook.nativeUnhookMul(); else if(i==2)RaHook.nativeUnhookDouble(); else RaHook.nativeUnhookDouble();
-            } else {
-                int r=0;
-                if(i==0)r=RaHook.nativeHookAdd(); else if(i==1)r=RaHook.nativeHookMul(); else if(i==2)r=RaHook.nativeHookDouble();
-                if(r==0){Toast.makeText(this,"hook failed",Toast.LENGTH_SHORT).show();return;}
-            }
-            hkOn[i]=!hkOn[i]; setHkColor(i);
-        } catch(Exception e) { Toast.makeText(this,"crash",Toast.LENGTH_SHORT).show(); }
     }
 }

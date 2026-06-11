@@ -15,4 +15,5 @@ public class RaHook {
     public static native int nativeUnhookAll();
 
     public static native String nativeVersion();
+    public static native String nativeRunTests();
 }
