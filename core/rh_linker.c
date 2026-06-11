@@ -76,6 +76,30 @@ void *rh_dlsym_symtab(void *handle, const char *sym) {
 #endif
 }
 
+// gap_cb — dl_iterate_phdr callback
+struct gap_ctx { const char *lib; rh_gap_t *gaps; size_t count; size_t cap; };
+
+static int gap_cb(struct dl_phdr_info *info, size_t sz, void *arg) {
+    struct gap_ctx *c = (struct gap_ctx *)arg;
+    (void)sz;
+    if (!c->lib || strstr(info->dlpi_name, c->lib)) {
+        for (size_t i = 0; i + 1 < info->dlpi_phnum; i++) {
+            if (info->dlpi_phdr[i].p_type != PT_LOAD || info->dlpi_phdr[i+1].p_type != PT_LOAD) continue;
+            uintptr_t end1 = (uintptr_t)info->dlpi_addr + info->dlpi_phdr[i].p_vaddr + info->dlpi_phdr[i].p_memsz;
+            uintptr_t start2 = (uintptr_t)info->dlpi_addr + info->dlpi_phdr[i+1].p_vaddr;
+            uintptr_t pg_end = (end1 + 4095) & ~4095UL;
+            if (pg_end < start2 && start2 - pg_end >= 8) {
+                c->gaps = realloc(c->gaps, (c->count + 1) * sizeof(rh_gap_t));
+                c->gaps[c->count].start = (void *)pg_end;
+                c->gaps[c->count].end = (void *)start2;
+                c->gaps[c->count].size = start2 - pg_end;
+                c->count++;
+            }
+        }
+    }
+    return 0;
+}
+
 int rh_linker_scan_gaps(const char *lib, rh_gap_t **gaps, size_t *count) {
     *gaps = NULL; *count = 0;
     (void)lib;
@@ -88,39 +112,9 @@ int rh_linker_scan_gaps(const char *lib, rh_gap_t **gaps, size_t *count) {
 
 #ifdef __ANDROID__
     // use dl_iterate_phdr to find ELF gaps
-    struct callback_data {
-        const char *lib;
-        rh_gap_t *gaps;
-        size_t count;
-        size_t cap;
-    } data = {lib, NULL, 0, 0};
 
-    dl_iterate_phdr([](struct dl_phdr_info *info, size_t sz, void *arg) -> int {
-        (void)sz;
-        struct callback_data *d = (struct callback_data *)arg;
-        if (!d->lib || strstr(info->dlpi_name, d->lib)) {
-            // scan phdrs for gaps between LOAD segments
-            for (size_t i = 0; i + 1 < info->dlpi_phnum; i++) {
-                if (info->dlpi_phdr[i].p_type != PT_LOAD) continue;
-                if (info->dlpi_phdr[i+1].p_type != PT_LOAD) continue;
-                uintptr_t end1 = (uintptr_t)info->dlpi_addr + info->dlpi_phdr[i].p_vaddr
-                               + info->dlpi_phdr[i].p_memsz;
-                uintptr_t start2 = (uintptr_t)info->dlpi_addr + info->dlpi_phdr[i+1].p_vaddr;
-                uintptr_t page_end = (end1 + 4095) & ~4095UL;
-                if (page_end < start2) {
-                    size_t gap_sz = start2 - page_end;
-                    if (gap_sz >= 8) {
-                        d->gaps = realloc(d->gaps, (d->count + 1) * sizeof(rh_gap_t));
-                        d->gaps[d->count].start = (void *)page_end;
-                        d->gaps[d->count].end = (void *)start2;
-                        d->gaps[d->count].size = gap_sz;
-                        d->count++;
-                    }
-                }
-            }
-        }
-        return 0;
-    }, &data);
+    struct gap_ctx data = {lib, NULL, 0, 0};
+    dl_iterate_phdr(gap_cb, &data);
 
     *gaps = data.gaps;
     *count = data.count;

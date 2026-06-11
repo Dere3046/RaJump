@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'rahook'
+    namespace 'rahook.app'
     compileSdk 34
     defaultConfig {
-        applicationId "rahook"
+        applicationId "rahook.app"
         minSdk 21
         targetSdk 34
-        ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64' }
+        ndkVersion '25.1.8937393'
+        ndk { abiFilters 'x86_64', 'x86' }
         externalNativeBuild {
             cmake { cppFlags "-std=gnu11" }
         }

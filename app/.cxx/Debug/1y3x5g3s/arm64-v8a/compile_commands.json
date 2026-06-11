@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/Dere3046/code/RaJump/RaJump_p/app/.cxx/Debug/1y3x5g3s/arm64-v8a",
+  "command": "/home/Dere3046/android-sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android21 --sysroot=/home/Dere3046/android-sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Drahook_jni_EXPORTS -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -std=gnu11 -o CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o -c /home/Dere3046/code/RaJump/RaJump_p/app/src/main/cpp/rahook_jni.c",
+  "file": "/home/Dere3046/code/RaJump/RaJump_p/app/src/main/cpp/rahook_jni.c"
+}
+]

@@ -12,16 +12,105 @@
 
 #define RAHOOK_JNI_VERSION JNI_VERSION_1_6
 
+static int native_test_add(int a, int b) { return a + b; }
+static int native_test_mul(int a, int b) { return a * b; }
+static int native_test_double(int x) { return x * 2; }
+static int native_test_triple(int x) { return x * 3; }
+
+static void *g_hook_add = NULL;
+static void *g_hook_mul = NULL;
+static void *g_hook_double = NULL;
+static void *g_hook_triple = NULL;
+
+// hook replacement functions
+static int hook_add(int a, int b) { return a + b + 100; }
+static int hook_mul(int a, int b) { return a * b * 10; }
+static int hook_double(int x) { return x * 20; }
+static int hook_triple(int x) { return x * 30; }
+
 JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeInit(JNIEnv *env, jclass clazz) {
+Java_rahook_RaHook_nativeAdd(JNIEnv *env, jclass clazz, jint a, jint b) {
     (void)env; (void)clazz;
-    return (jint)rahook_init();
+    return native_test_add(a, b);
 }
 
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeDeinit(JNIEnv *env, jclass clazz) {
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeMul(JNIEnv *env, jclass clazz, jint a, jint b) {
     (void)env; (void)clazz;
-    rahook_deinit();
+    return native_test_mul(a, b);
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeDouble(JNIEnv *env, jclass clazz, jint x) {
+    (void)env; (void)clazz;
+    return native_test_double(x);
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeTriple(JNIEnv *env, jclass clazz, jint x) {
+    (void)env; (void)clazz;
+    return native_test_triple(x);
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeHookAdd(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (g_hook_add) return 0;
+    g_hook_add = rahook_quick((void*)native_test_add, (void*)hook_add, NULL);
+    return g_hook_add ? 1 : 0;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeUnhookAdd(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (!g_hook_add) return 0;
+    rahook_remove(g_hook_add);
+    g_hook_add = NULL;
+    return 1;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeHookMul(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (g_hook_mul) return 0;
+    g_hook_mul = rahook_quick((void*)native_test_mul, (void*)hook_mul, NULL);
+    return g_hook_mul ? 1 : 0;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeUnhookMul(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (!g_hook_mul) return 0;
+    rahook_remove(g_hook_mul);
+    g_hook_mul = NULL;
+    return 1;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeHookDouble(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (g_hook_double) return 0;
+    g_hook_double = rahook_quick((void*)native_test_double, (void*)hook_double, NULL);
+    return g_hook_double ? 1 : 0;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeUnhookDouble(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (!g_hook_double) return 0;
+    rahook_remove(g_hook_double);
+    g_hook_double = NULL;
+    return 1;
+}
+
+JNIEXPORT jint JNICALL
+Java_rahook_RaHook_nativeUnhookAll(JNIEnv *env, jclass clazz) {
+    (void)env; (void)clazz;
+    if (g_hook_add) { rahook_remove(g_hook_add); g_hook_add = NULL; }
+    if (g_hook_mul) { rahook_remove(g_hook_mul); g_hook_mul = NULL; }
+    if (g_hook_double) { rahook_remove(g_hook_double); g_hook_double = NULL; }
+    if (g_hook_triple) { rahook_remove(g_hook_triple); g_hook_triple = NULL; }
+    return 1;
 }
 
 JNIEXPORT jstring JNICALL
@@ -30,184 +119,83 @@ Java_rahook_RaHook_nativeVersion(JNIEnv *env, jclass clazz) {
     return (*env)->NewStringUTF(env, RAHOOK_VERSION);
 }
 
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeGetErrno(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jint)rahook_get_errno();
-}
-
 JNIEXPORT jstring JNICALL
-Java_rahook_RaHook_nativeToErrmsg(JNIEnv *env, jclass clazz, jint err) {
+Java_rahook_RaHook_nativeRunTests(JNIEnv *env, jclass clazz) {
     (void)clazz;
-    return (*env)->NewStringUTF(env, rahook_to_errmsg((int)err));
-}
+    char buf[4096];
+    int off = 0;
+    off += snprintf(buf + off, sizeof(buf) - off, "RaHook %s\n", RAHOOK_VERSION);
 
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeSetDisable(JNIEnv *env, jclass clazz, jboolean disable) {
-    (void)env; (void)clazz;
-    rahook_set_disable((bool)disable);
-}
+    off += snprintf(buf + off, sizeof(buf) - off, "\ninit: %s\n", rahook_init() == 0 ? "OK" : "FAIL");
+    off += snprintf(buf + off, sizeof(buf) - off, "version: %s\n", RAHOOK_VERSION);
+    off += snprintf(buf + off, sizeof(buf) - off, "errno: %d\n", rahook_get_errno());
+    off += snprintf(buf + off, sizeof(buf) - off, "errmsg: %s\n", rahook_to_errmsg(0));
 
-JNIEXPORT jboolean JNICALL
-Java_rahook_RaHook_nativeGetDisable(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jboolean)rahook_get_disable();
-}
+    off += snprintf(buf + off, sizeof(buf) - off, "\nsymbol:\n");
+    void *h = rahook_dlopen("libc.so");
+    if (h) {
+        void *sym = rahook_dlsym(h, "strlen");
+        off += snprintf(buf + off, sizeof(buf) - off, "  dlopen libc OK, strlen=%p\n", sym);
+        rahook_dlclose(h);
+    } else {
+        off += snprintf(buf + off, sizeof(buf) - off, "  dlopen libc FAIL\n");
+    }
 
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeSetDebug(JNIEnv *env, jclass clazz, jboolean debug) {
-    (void)env; (void)clazz;
-    rahook_set_debug((bool)debug);
-}
+    off += snprintf(buf + off, sizeof(buf) - off, "\nhook/test:\n");
+    off += snprintf(buf + off, sizeof(buf) - off, "  add(3,4)=%d (expect 7)\n", native_test_add(3, 4));
+    void *s = rahook_quick((void*)native_test_add, (void*)hook_add, NULL);
+    if (s) {
+        off += snprintf(buf + off, sizeof(buf) - off, "  hooked add(3,4)=%d (expect 107)\n", native_test_add(3, 4));
+        off += snprintf(buf + off, sizeof(buf) - off, "  mul(5,6)=%d (expect 30)\n", native_test_mul(5, 6));
+        rahook_remove(s);
+        off += snprintf(buf + off, sizeof(buf) - off, "  unhooked add(3,4)=%d (expect 7)\n", native_test_add(3, 4));
+    } else {
+        off += snprintf(buf + off, sizeof(buf) - off, "  hook FAILED\n");
+    }
 
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativeDlopen(JNIEnv *env, jclass clazz, jstring lib) {
-    (void)clazz;
-    const char *l = (*env)->GetStringUTFChars(env, lib, NULL);
-    void *h = rahook_dlopen(l);
-    (*env)->ReleaseStringUTFChars(env, lib, l);
-    return (jlong)(uintptr_t)h;
-}
+    off += snprintf(buf + off, sizeof(buf) - off, "\ntransaction:\n");
+    rahook_begin_transaction();
+    void *st1 = rahook_quick((void*)native_test_mul, (void*)hook_mul, NULL);
+    void *st2 = rahook_quick((void*)native_test_double, (void*)hook_double, NULL);
+    off += snprintf(buf + off, sizeof(buf) - off, "  batched stubs = %p,%p\n", st1, st2);
+    rahook_abort_transaction();
+    off += snprintf(buf + off, sizeof(buf) - off, "  aborted, mul(5,6)=%d (expect 30)\n", native_test_mul(5, 6));
 
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeDlclose(JNIEnv *env, jclass clazz, jlong handle) {
-    (void)env; (void)clazz;
-    rahook_dlclose((void *)(uintptr_t)handle);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativeDlsym(JNIEnv *env, jclass clazz, jlong handle, jstring sym) {
-    (void)clazz;
-    const char *s = (*env)->GetStringUTFChars(env, sym, NULL);
-    void *addr = rahook_dlsym((void *)(uintptr_t)handle, s);
-    (*env)->ReleaseStringUTFChars(env, sym, s);
-    return (jlong)(uintptr_t)addr;
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativeHook(JNIEnv *env, jclass clazz, jlong target, jlong replace, jint flags) {
-    (void)env; (void)clazz;
-    return (jlong)(uintptr_t)rahook((void *)(uintptr_t)target, (void *)(uintptr_t)replace, NULL, (uint32_t)flags);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativeHookSymbol(JNIEnv *env, jclass clazz, jstring lib, jstring sym,
-                                      jlong replace, jint flags) {
-    (void)clazz;
-    const char *l = (*env)->GetStringUTFChars(env, lib, NULL);
-    const char *s = (*env)->GetStringUTFChars(env, sym, NULL);
-    void *st = rahook_symbol(l, s, (void *)(uintptr_t)replace, NULL, (uint32_t)flags);
-    (*env)->ReleaseStringUTFChars(env, lib, l);
-    (*env)->ReleaseStringUTFChars(env, sym, s);
-    return (jlong)(uintptr_t)st;
-}
-
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeRemove(JNIEnv *env, jclass clazz, jlong stub) {
-    (void)env; (void)clazz;
-    return (jint)rahook_remove((void *)(uintptr_t)stub);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativePrePost(JNIEnv *env, jclass clazz, jlong target, jint flags) {
-    (void)env; (void)clazz;
-    return (jlong)(uintptr_t)rahook_pre_post((void *)(uintptr_t)target, NULL, NULL, NULL, NULL, (uint32_t)flags);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativeIntercept(JNIEnv *env, jclass clazz, jlong addr) {
-    (void)env; (void)clazz;
-    return (jlong)(uintptr_t)rahook_intercept((void *)(uintptr_t)addr, NULL, NULL);
-}
-
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeUnintercept(JNIEnv *env, jclass clazz, jlong stub) {
-    (void)env; (void)clazz;
-    return (jint)rahook_unintercept((void *)(uintptr_t)stub);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativePlt(JNIEnv *env, jclass clazz, jlong target, jlong replace) {
-    (void)env; (void)clazz;
-    return (jlong)(uintptr_t)rahook_plt((void *)(uintptr_t)target, (void *)(uintptr_t)replace, NULL);
-}
-
-JNIEXPORT jlong JNICALL
-Java_rahook_RaHook_nativePltSymbol(JNIEnv *env, jclass clazz, jstring lib, jstring sym, jlong replace) {
-    (void)clazz;
-    const char *l = (*env)->GetStringUTFChars(env, lib, NULL);
-    const char *s = (*env)->GetStringUTFChars(env, sym, NULL);
-    void *st = rahook_plt_symbol(l, s, (void *)(uintptr_t)replace, NULL);
-    (*env)->ReleaseStringUTFChars(env, lib, l);
-    (*env)->ReleaseStringUTFChars(env, sym, s);
-    return (jlong)(uintptr_t)st;
-}
-
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeBeginTransaction(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jint)rahook_begin_transaction();
-}
-
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeEndTransaction(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jint)rahook_end_transaction();
-}
-
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativeAbortTransaction(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jint)rahook_abort_transaction();
-}
-
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeRecordStart(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
+    off += snprintf(buf + off, sizeof(buf) - off, "\nrecord:\n");
     rahook_record_start();
-}
-
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeRecordStop(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
     rahook_record_stop();
-}
-
-JNIEXPORT jboolean JNICALL
-Java_rahook_RaHook_nativeRecordIsActive(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
-    return (jboolean)rahook_record_is_active();
-}
-
-JNIEXPORT jstring JNICALL
-Java_rahook_RaHook_nativeRecordExport(JNIEnv *env, jclass clazz) {
-    (void)clazz;
     char *json = rahook_record_export();
-    jstring result = (*env)->NewStringUTF(env, json);
+    off += snprintf(buf + off, sizeof(buf) - off, "  json=%s\n", json);
     rahook_record_free(json);
-    return result;
-}
 
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeIgnoreThread(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
+    off += snprintf(buf + off, sizeof(buf) - off, "\ndisable/ignore:\n");
+    rahook_set_disable(true);
+    off += snprintf(buf + off, sizeof(buf) - off, "  disabled=%d\n", rahook_get_disable());
+    rahook_set_disable(false);
+
     rahook_ignore_current_thread();
-}
-
-JNIEXPORT void JNICALL
-Java_rahook_RaHook_nativeUnignoreThread(JNIEnv *env, jclass clazz) {
-    (void)env; (void)clazz;
+    off += snprintf(buf + off, sizeof(buf) - off, "  ignored=%d\n", rahook_is_thread_ignored());
     rahook_unignore_current_thread();
-}
 
-JNIEXPORT jint JNICALL
-Java_rahook_RaHook_nativePatch(JNIEnv *env, jclass clazz, jlong addr, jbyteArray code) {
-    (void)clazz;
-    jsize len = (*env)->GetArrayLength(env, code);
-    jbyte *buf = (*env)->GetByteArrayElements(env, code, NULL);
-    int r = rahook_patch((void *)(uintptr_t)addr, buf, (size_t)len);
-    (*env)->ReleaseByteArrayElements(env, code, buf, JNI_ABORT);
-    return (jint)r;
+    off += snprintf(buf + off, sizeof(buf) - off, "\nintercept:\n");
+    void *is = rahook_intercept((void*)native_test_add, NULL, NULL);
+    off += snprintf(buf + off, sizeof(buf) - off, "  intercept=%p\n", is);
+    if (is) rahook_unintercept(is);
+
+    off += snprintf(buf + off, sizeof(buf) - off, "\nplt:\n");
+    void *ps = rahook_plt((void*)native_test_add, (void*)hook_add, NULL);
+    off += snprintf(buf + off, sizeof(buf) - off, "  plt(%p)=%p\n", native_test_add, ps);
+    if (ps) rahook_remove(ps);
+
+    off += snprintf(buf + off, sizeof(buf) - off, "\nstress:\n");
+    for (int i = 0; i < 500; i++) {
+        void *ss = rahook_quick((void*)native_test_double, (void*)hook_double, NULL);
+        if (ss) rahook_remove(ss);
+    }
+    off += snprintf(buf + off, sizeof(buf) - off, "  500 cycles OK\n");
+
+    rahook_deinit();
+    return (*env)->NewStringUTF(env, buf);
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
