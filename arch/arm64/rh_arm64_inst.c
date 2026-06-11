@@ -46,6 +46,7 @@
 
 #include "rh_arm64_inst.h"
 
+#include <inttypes.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,6 +66,7 @@
 #include "rh_sig.h"
 #include "rh_util.h"
 #include "rahook.h"
+#include "rh_errno.h"
 
 static int rh_arm64_inst_rewrite(rh_arm64_inst_t *self, uintptr_t target_addr, rh_addr_info_t *addr_info,
                            uintptr_t resume_addr, rh_arm64_inst_set_orig_addr_t set_orig_addr,
@@ -149,7 +151,7 @@ static int rh_arm64_inst_rewrite_with_island(rh_arm64_inst_t *self, uintptr_t ta
     uintptr_t island_enter_range_low = pc > RH_ARM64_INST_A64_B_OFFSET_HIGH ? pc - RH_ARM64_INST_A64_B_OFFSET_HIGH : 0;
     uintptr_t island_enter_range_high =
         UINTPTR_MAX - pc > RH_ARM64_INST_A64_B_OFFSET_LOW ? pc + RH_ARM64_INST_A64_B_OFFSET_LOW : UINTPTR_MAX;
-    rh_island_alloc(&self->island_enter, 8, island_enter_range_low, island_enter_range_high, pc, addr_info);
+    uintptr_t __rn = island_enter_range_low; uintptr_t __rx = island_enter_range_high; rh_island_alloc(&self->island_enter, pc, 8, __rx > __rn ? __rx - __rn : __rn - __rx);
     if (0 == self->island_enter.addr) return RAHOOK_ERRNO_HOOK_ISLAND_ENTER;
 
     // relative jump to "pc + 4" in island-enter
@@ -164,9 +166,9 @@ static int rh_arm64_inst_rewrite_with_island(rh_arm64_inst_t *self, uintptr_t ta
   int r;
   if (0 != (r = rh_arm64_inst_safe_rewrite(self, target_addr, addr_info, resume_addr, set_orig_addr,
                                      set_orig_addr_arg))) {
-    if (0 != self->island_enter.addr) rh_island_free(&self->island_enter, (uintptr_t)addr_info->dli_fbase);
+    if (0 != self->island_enter.addr) rh_island_free(&self->island_enter);
     if (0 != self->island_rewrite.addr)
-      rh_island_free(&self->island_rewrite, (uintptr_t)addr_info->dli_fbase);
+      rh_island_free(&self->island_rewrite);
   }
   return r;
 }
@@ -183,8 +185,7 @@ static int rh_arm64_inst_reloc_with_island(rh_arm64_inst_t *self, uintptr_t targ
   uintptr_t island_exit_range_low = pc > RH_ARM64_INST_A64_B_OFFSET_LOW ? pc - RH_ARM64_INST_A64_B_OFFSET_LOW : 0;
   uintptr_t island_exit_range_high =
       UINTPTR_MAX - pc > RH_ARM64_INST_A64_B_OFFSET_HIGH ? pc + RH_ARM64_INST_A64_B_OFFSET_HIGH : UINTPTR_MAX;
-  rh_island_alloc(&new_island_exit, new_island_exit_size, island_exit_range_low, island_exit_range_high, pc,
-                  addr_info);
+  uintptr_t __rn = island_exit_range_low; uintptr_t __rx = island_exit_range_high; rh_island_alloc(&new_island_exit, pc, new_island_exit_size, __rx > __rn ? __rx - __rn : __rn - __rx);
   if (0 == new_island_exit.addr) return RAHOOK_ERRNO_HOOK_ISLAND_EXIT;
 
   // absolute jump to new_addr in island-exit
@@ -198,12 +199,12 @@ static int rh_arm64_inst_reloc_with_island(rh_arm64_inst_t *self, uintptr_t targ
   // relative jump to the island-exit by overwriting the head of original function
   rh_a64_relative_jump(new_exit, new_island_exit.addr, pc);
   if (0 != (r = rh_util_write_inst(target_addr, new_exit, self->backup_len))) {
-    rh_island_free(&new_island_exit, (uintptr_t)addr_info->dli_fbase);
+    rh_island_free(&new_island_exit);
     return r;
   }
 
   // OK
-  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit, (uintptr_t)addr_info->dli_fbase);
+  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit);
   self->island_exit = new_island_exit;
   memcpy(self->exit, new_exit, self->backup_len);
 
@@ -229,9 +230,9 @@ static int rh_arm64_inst_hook_with_island(rh_arm64_inst_t *self, uintptr_t targe
     return r;
   if (0 !=
       (r = rh_arm64_inst_reloc_with_island(self, target_addr, addr_info, new_addr, is_to_interceptor, false))) {
-    if (0 != self->island_enter.addr) rh_island_free(&self->island_enter, (uintptr_t)addr_info->dli_fbase);
+    if (0 != self->island_enter.addr) rh_island_free(&self->island_enter);
     if (0 != self->island_rewrite.addr)
-      rh_island_free(&self->island_rewrite, (uintptr_t)addr_info->dli_fbase);
+      rh_island_free(&self->island_rewrite);
     return r;
   }
   return 0;
@@ -447,7 +448,8 @@ int rh_arm64_inst_rehook(rh_arm64_inst_t *self, uintptr_t target_addr, rh_addr_i
   }
 }
 
-int rh_arm64_inst_unhook(rh_arm64_inst_t *self, uintptr_t target_addr, uintptr_t load_bias) {
+int rh_arm64_inst_unhook(rh_arm64_inst_t *self, void *target) {
+  uintptr_t target_addr = (uintptr_t)target;
   int r;
 
   // restore the instructions at the target address
@@ -463,9 +465,9 @@ int rh_arm64_inst_unhook(rh_arm64_inst_t *self, uintptr_t target_addr, uintptr_t
   __atomic_thread_fence(__ATOMIC_SEQ_CST);
 
   // free memory space for island-exit and island-enter
-  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit, load_bias);
-  if (0 != self->island_enter.addr) rh_island_free(&self->island_enter, load_bias);
-  if (0 != self->island_rewrite.addr) rh_island_free(&self->island_rewrite, load_bias);
+  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit);
+  if (0 != self->island_enter.addr) rh_island_free(&self->island_enter);
+  if (0 != self->island_rewrite.addr) rh_island_free(&self->island_rewrite);
 
   // free memory space for enter
   rh_enter_free(self->enter);

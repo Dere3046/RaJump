@@ -8,6 +8,9 @@
 #include <stdint.h>
 
 #include "rh_island.h"
+#include "rh_linker.h"
+
+typedef void (*rh_arm64_inst_set_orig_addr_t)(uintptr_t orig_addr, void *arg);
 
 typedef struct {
   uint8_t backup[24];
@@ -21,4 +24,3 @@ typedef struct {
 
 int rh_arm64_inst_hook(rh_arm64_inst_t *self, void *target, void *replace, void **origin);
 int rh_arm64_inst_unhook(rh_arm64_inst_t *self, void *target);
-void rh_arm64_inst_free(rh_arm64_inst_t *self);

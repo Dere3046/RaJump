@@ -23,20 +23,19 @@ list(APPEND RAHOOK_SRC
 )
 
 if(${ANDROID_ABI} STREQUAL "arm64-v8a")
-    message(WARNING "ARM64 backend interface mismatched with rahook.c — skipping ARM64 ABI")
-    # Build as empty stub for now
-    add_library(rahook_jni SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/rahook_jni.c)
-    target_include_directories(rahook_jni PRIVATE ${RAHOOK_DIR} ${CORE_DIR} ${XDL_DIR})
-    target_compile_options(rahook_jni PRIVATE -Os -fvisibility=hidden)
-    target_link_libraries(rahook_jni log dl z)
-    return()
+    add_definitions(-DRH_ARCH_ARM64=1)
+    list(APPEND RAHOOK_SRC
+        ${RAHOOK_DIR}/arch/arm64/rh_a64.c ${RAHOOK_DIR}/arch/arm64/rh_arm64_inst.c
+        ${RAHOOK_DIR}/arch/arm64/rh_bridge.c ${RAHOOK_DIR}/arch/arm64/rh_lr_rewrite.c)
+    include_directories(${RAHOOK_DIR}/arch/arm64)
 elseif(${ANDROID_ABI} STREQUAL "armeabi-v7a")
-    message(WARNING "ARM32 backend interface mismatched — skipping ARM32 ABI")
-    add_library(rahook_jni SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/rahook_jni.c)
-    target_include_directories(rahook_jni PRIVATE ${RAHOOK_DIR} ${CORE_DIR} ${XDL_DIR})
-    target_compile_options(rahook_jni PRIVATE -Os -fvisibility=hidden)
-    target_link_libraries(rahook_jni log dl z)
-    return()
+    add_definitions(-DRH_ARCH_ARM=1)
+    list(APPEND RAHOOK_SRC
+        ${RAHOOK_DIR}/arch/arm/rh_a32.c ${RAHOOK_DIR}/arch/arm/rh_t16.c
+        ${RAHOOK_DIR}/arch/arm/rh_t32.c ${RAHOOK_DIR}/arch/arm/rh_txx.c
+        ${RAHOOK_DIR}/arch/arm/rh_arm_inst.c
+        ${RAHOOK_DIR}/arch/arm/rh_bridge.c ${RAHOOK_DIR}/arch/arm/rh_lr_rewrite.c)
+    include_directories(${RAHOOK_DIR}/arch/arm)
 elseif(${ANDROID_ABI} STREQUAL "x86")
     add_definitions(-DRH_ARCH_X86=1)
     list(APPEND RAHOOK_SRC ${RAHOOK_DIR}/arch/x86/rh_ia32.c ${RAHOOK_DIR}/arch/x86/rh_x86_inst.c)

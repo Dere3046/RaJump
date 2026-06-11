@@ -51,6 +51,7 @@
 #include <stdint.h>
 
 #include "rh_log.h"
+#include "rh_errno.h"
 
 // https://developer.arm.com/documentation/ddi0406/latest
 // https://developer.arm.com/documentation/ddi0597/latest

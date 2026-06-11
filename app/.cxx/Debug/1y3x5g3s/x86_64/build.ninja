@@ -56,8 +56,6 @@ build CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o: C_COMPILER__rahook_
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/src/main/cpp
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -66,8 +64,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_bytes
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -76,8 +72,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_defle
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -86,8 +80,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -96,8 +88,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_invoc
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -106,8 +96,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_islan
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -116,8 +104,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_linke
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -126,8 +112,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -136,8 +120,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_recor
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -146,8 +128,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -156,8 +136,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -166,8 +144,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_tramp
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/rahook.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -176,8 +152,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o: C
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -186,8 +160,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/x
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -196,8 +168,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/x
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -206,8 +176,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/x
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -216,8 +184,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/x
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -226,8 +192,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/x
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -236,8 +200,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/h
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/rh_x64.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/rh_x64.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -246,8 +208,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/r
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/rh_x64_inst.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/rh_x64_inst.c || cmake_object_order_depends_target_rahook_jni
   DEFINES = -DRH_ARCH_X86_64=1 -Drahook_jni_EXPORTS
@@ -256,8 +216,6 @@ build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/r
   INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/x86_64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
 
 
 # =============================================================================
@@ -276,9 +234,8 @@ build ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jn
   PRE_LINK = :
   SONAME = librahook_jni.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_COMPILE_PDB = CMakeFiles/rahook_jni.dir/
   TARGET_FILE = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.so
-  TARGET_PDB = ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.pdb
+  TARGET_PDB = rahook_jni.so.dbg
 
 
 #############################################
@@ -327,14 +284,14 @@ build all: phony ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/l
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../../../../CMakeLists.txt /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompilerABI.c /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Determine-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Determine.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Initialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android/Determine-Compiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Linux.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/flags.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Clang.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Determine.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Initialize.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Determine-Compiler.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/platforms.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../../../../CMakeLists.txt /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Initialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Linux.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/flags.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Clang.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Initialize.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/platforms.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../../../../CMakeLists.txt /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompilerABI.c /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Determine-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Determine.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Initialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android/Determine-Compiler.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Linux.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/flags.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Clang.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Determine.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Initialize.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Determine-Compiler.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/platforms.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8/CMakeSystem.cmake: phony
+build ../../../../CMakeLists.txt /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang-C.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Clang.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android-Initialize.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Android.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/Linux.cmake /home/Dere3046/android-sdk/cmake/3.22.1/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android-legacy.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/flags.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Clang.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android-Initialize.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/hooks/pre/Android.cmake /home/Dere3046/android-sdk/ndk/25.1.8937393/build/cmake/platforms.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8/CMakeSystem.cmake: phony
 
 
 #############################################

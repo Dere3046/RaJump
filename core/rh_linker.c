@@ -179,3 +179,20 @@ int rh_linker_process_deferred(const char *lib_name) {
     }
     return 0;
 }
+
+#include <dlfcn.h>
+
+int rh_linker_get_addr_info_by_addr(rh_addr_info_t *info, void *addr, bool is_sym, bool is_proc, bool ignore_sym) {
+    (void)is_sym; (void)ignore_sym;
+    memset(info, 0, sizeof(*info));
+    info->is_sym_addr = true;
+    info->is_proc_start = is_proc;
+    Dl_info dl;
+    if (dladdr(addr, &dl)) {
+        info->dli_fbase = dl.dli_fbase;
+        info->dli_fname = strdup(dl.dli_fname);
+        info->dli_saddr = dl.dli_saddr;
+        info->dli_ssize = 0;
+    }
+    return 0;
+}

@@ -81,7 +81,7 @@ int rh_x86_inst_hook(rh_x86_inst_t *inst, void *target, void *replace, void **or
     {
         int rh_safe_write_ok = 0;
         rh_sig_jmp_t __sj;
-        if (0 == rh_sig_setjmp(&__sj, SIGSEGV)) {
+        if (0 == rh_sig_setjmp(&__sj, SIGSEGV, -1)) {
             if (mprotect((void *)((uintptr_t)target & ~0xFFFUL), 4096,
                          PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
                 rh_sig_exit(&__sj);

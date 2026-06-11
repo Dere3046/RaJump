@@ -5,6 +5,8 @@
 
 #include "rh_island.h"
 
+typedef void (*rh_arm_inst_set_orig_addr_t)(uintptr_t orig_addr, void *arg);
+
 typedef struct {
   uint8_t backup[12];
   size_t backup_len;

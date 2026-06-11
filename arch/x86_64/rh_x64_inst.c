@@ -122,7 +122,7 @@ int rh_x64_inst_hook(rh_x64_inst_t *inst, void *target, void *replace, void **or
     {
         int rh_safe_write_ok = 0;
         rh_sig_jmp_t __sj;
-        if (0 == rh_sig_setjmp(&__sj, SIGSEGV)) {
+        if (0 == rh_sig_setjmp(&__sj, SIGSEGV, -1)) {
             uintptr_t page = (uintptr_t)tgt & ~0xFFFUL;
             if (mprotect((void *)page, 4096, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
                 rh_sig_exit(&__sj);

@@ -46,6 +46,7 @@
 #include "rahook.h"
 #include "rh_invocation_stack.h"
 #include "xdl.h"
+#include "rh_errno.h"
 
 static void rh_arm_inst_thumb_get_rewrite_info(rh_arm_inst_t *self, uintptr_t target_addr,
                                            rh_txx_rewrite_info_t *rinfo) {
@@ -346,7 +347,7 @@ static int rh_arm_inst_thumb_reloc_with_island(rh_arm_inst_t *self, uintptr_t ta
   uintptr_t island_exit_range_low = pc > RH_ARM_INST_T32_B_RANGE_LOW ? pc - RH_ARM_INST_T32_B_RANGE_LOW : 0;
   uintptr_t island_exit_range_high =
       UINTPTR_MAX - pc > RH_ARM_INST_T32_B_RANGE_HIGH ? pc + RH_ARM_INST_T32_B_RANGE_HIGH : UINTPTR_MAX;
-  rh_island_alloc(&new_island_exit, 8, island_exit_range_low, island_exit_range_high, pc, addr_info);
+  uintptr_t __rn = island_exit_range_low; uintptr_t __rx = island_exit_range_high; rh_island_alloc(&new_island_exit, pc, 8, __rx > __rn ? __rx - __rn : __rn - __rx);
   if (0 == new_island_exit.addr) return RAHOOK_ERRNO_HOOK_ISLAND_EXIT;
 
   // absolute jump to new_addr in island-exit
@@ -356,12 +357,12 @@ static int rh_arm_inst_thumb_reloc_with_island(rh_arm_inst_t *self, uintptr_t ta
   // relative jump to the island-exit by overwriting the head of original function
   rh_t32_relative_jump((uint16_t *)new_exit, new_island_exit.addr, pc);
   if (0 != (r = rh_util_write_inst(target_addr, new_exit, self->backup_len))) {
-    rh_island_free(&new_island_exit, (uintptr_t)addr_info->dli_fbase);
+    rh_island_free(&new_island_exit);
     return r;
   }
 
 
-  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit, (uintptr_t)addr_info->dli_fbase);
+  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit);
   self->island_exit = new_island_exit;
   memcpy(self->exit, new_exit, self->backup_len);
 
@@ -506,7 +507,7 @@ static int rh_arm_inst_arm_reloc_with_island(rh_arm_inst_t *self, uintptr_t targ
   uintptr_t island_exit_range_low = pc > RH_ARM_INST_A32_B_RANGE_LOW ? pc - RH_ARM_INST_A32_B_RANGE_LOW : 0;
   uintptr_t island_exit_range_high =
       UINTPTR_MAX - pc > RH_ARM_INST_A32_B_RANGE_HIGH ? pc + RH_ARM_INST_A32_B_RANGE_HIGH : UINTPTR_MAX;
-  rh_island_alloc(&new_island_exit, 8, island_exit_range_low, island_exit_range_high, pc, addr_info);
+  uintptr_t __rn = island_exit_range_low; uintptr_t __rx = island_exit_range_high; rh_island_alloc(&new_island_exit, pc, 8, __rx > __rn ? __rx - __rn : __rn - __rx);
   if (0 == new_island_exit.addr) return RAHOOK_ERRNO_HOOK_ISLAND_EXIT;
 
   // absolute jump to new_addr in island-exit
@@ -516,12 +517,12 @@ static int rh_arm_inst_arm_reloc_with_island(rh_arm_inst_t *self, uintptr_t targ
   // relative jump to the island-exit by overwriting the head of original function
   rh_a32_relative_jump((uint32_t *)new_exit, new_island_exit.addr, pc);
   if (0 != (r = rh_util_write_inst(target_addr, new_exit, self->backup_len))) {
-    rh_island_free(&new_island_exit, (uintptr_t)addr_info->dli_fbase);
+    rh_island_free(&new_island_exit);
     return r;
   }
 
 
-  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit, (uintptr_t)addr_info->dli_fbase);
+  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit);
   self->island_exit = new_island_exit;
   memcpy(self->exit, new_exit, self->backup_len);
 
@@ -685,7 +686,8 @@ int rh_arm_inst_rehook(rh_arm_inst_t *self, uintptr_t target_addr, rh_addr_info_
   }
 }
 
-int rh_arm_inst_unhook(rh_arm_inst_t *self, uintptr_t target_addr, uintptr_t load_bias) {
+int rh_arm_inst_unhook(rh_arm_inst_t *self, void *target) {
+  uintptr_t target_addr = (uintptr_t)target;
   int r;
   bool is_thumb = RH_UTIL_IS_THUMB(target_addr);
   if (is_thumb) target_addr = RH_UTIL_CLEAR_BIT0(target_addr);
@@ -703,7 +705,7 @@ int rh_arm_inst_unhook(rh_arm_inst_t *self, uintptr_t target_addr, uintptr_t loa
   __atomic_thread_fence(__ATOMIC_SEQ_CST);
 
   // free memory space for island-exit
-  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit, load_bias);
+  if (0 != self->island_exit.addr) rh_island_free(&self->island_exit);
 
   // free memory space for enter
   rh_enter_free(self->enter);

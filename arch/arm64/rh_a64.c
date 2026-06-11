@@ -29,6 +29,7 @@
 
 #include "rh_config.h"
 #include "rh_log.h"
+#include "rh_errno.h"
 
 typedef enum {
   IGNORED = 0,
@@ -164,8 +165,7 @@ static int rh_a64_build_island_rewrite(uintptr_t addr, rh_a64_rewrite_info_t *ri
       addr > (RH_A64_B_OFFSET_HIGH + 4) ? (addr - RH_A64_B_OFFSET_HIGH - 4) : 0;
   uintptr_t island_enter_range_high =
       (UINTPTR_MAX - addr > RH_A64_B_OFFSET_LOW - 4) ? (addr + RH_A64_B_OFFSET_LOW - 4) : UINTPTR_MAX;
-  rh_island_alloc(rinfo->island_rewrite, 8, island_enter_range_low, island_enter_range_high, addr,
-                  rinfo->addr_info);
+  uintptr_t __rn = island_enter_range_low; uintptr_t __rx = island_enter_range_high; rh_island_alloc(rinfo->island_rewrite, addr, 8, __rx > __rn ? __rx - __rn : __rn - __rx);
   if (0 == rinfo->island_rewrite->addr) return RAHOOK_ERRNO_HOOK_ISLAND_REWRITE;
 
   // relative jump to "pc + 4" in island-enter

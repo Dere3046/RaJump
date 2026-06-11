@@ -19,7 +19,9 @@
 #define rh_util_align_down(x, align) ((uintptr_t)(x) & ~((uintptr_t)(align) - 1))
 
 #if defined(__arm__)
-  #define rh_util_set_bit0(x)    ((uintptr_t)(x) | 1u)
+  #define RH_UTIL_SET_BIT0(x)    rh_util_set_bit0(x)
+#define RH_UTIL_CLEAR_BIT0(x)  rh_util_clear_bit0(x)
+#define RH_UTIL_IS_THUMB(x)    rh_util_is_thumb(x)
   #define rh_util_clear_bit0(x)  ((uintptr_t)(x) & 0xFFFFFFFEu)
   #define rh_util_is_thumb(x)    ((uintptr_t)(x) & 1u)
 #else
@@ -30,6 +32,10 @@
 
 #define rh_util_get_page_start(addr) ((uintptr_t)(addr) & ~(rh_page_size - 1))
 #define rh_util_get_page_end(addr)   rh_util_get_page_start((uintptr_t)(addr) + rh_page_size - 1)
+#define RH_UTIL_ARM_CPU_FEATURE_VFPV3D16  0x2
+#define RH_UTIL_ARM_CPU_FEATURE_VFPV3D32  0x4
+
+static inline size_t rh_util_get_arm_cpu_features(void) { return 0x4; }
 
 #define rh_util_is_within(a, start, end) ((uintptr_t)(a) >= (uintptr_t)(start) && (uintptr_t)(a) <= (uintptr_t)(end))
 

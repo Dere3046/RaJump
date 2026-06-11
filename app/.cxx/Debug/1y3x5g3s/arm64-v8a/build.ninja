@@ -50,12 +50,188 @@ cmake_ninja_workdir = /home/Dere3046/code/RaJump/RaJump_p/app/.cxx/Debug/1y3x5g3
 build cmake_object_order_depends_target_rahook_jni: phony || CMakeFiles/rahook_jni.dir
 
 build CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/app/src/main/cpp/rahook_jni.c || cmake_object_order_depends_target_rahook_jni
-  DEFINES = -Drahook_jni_EXPORTS
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
   DEP_FILE = CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o.d
-  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -std=gnu11
-  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/src/main/cpp
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/rahook.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_a64.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_a64.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_a64.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_arm64_inst.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_arm64_inst.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_arm64_inst.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_bridge.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_bridge.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_bridge.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64
+
+build CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_lr_rewrite.c.o: C_COMPILER__rahook_jni_Debug /home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_lr_rewrite.c || cmake_object_order_depends_target_rahook_jni
+  DEFINES = -DRH_ARCH_ARM64=1 -Drahook_jni_EXPORTS
+  DEP_FILE = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_lr_rewrite.c.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -Os -fvisibility=hidden -ffunction-sections -fdata-sections -fno-stack-protector -std=gnu11
+  INCLUDES = -I/home/Dere3046/code/RaJump/RaJump_p/app/../arch/arm64 -I/home/Dere3046/code/RaJump/RaJump_p/app/.. -I/home/Dere3046/code/RaJump/RaJump_p/app/../core -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/xdl -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/bsd -I/home/Dere3046/code/RaJump/RaJump_p/app/../third_party/hde64
+  OBJECT_DIR = CMakeFiles/rahook_jni.dir
+  OBJECT_FILE_DIR = CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64
 
 
 # =============================================================================
@@ -65,9 +241,9 @@ build CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o: C_COMPILER__rahook_
 #############################################
 # Link the shared library ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/arm64-v8a/librahook_jni.so
 
-build ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/arm64-v8a/librahook_jni.so: C_SHARED_LIBRARY_LINKER__rahook_jni_Debug CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o
+build ../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/arm64-v8a/librahook_jni.so: C_SHARED_LIBRARY_LINKER__rahook_jni_Debug CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_bytesig.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_deflector.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_hub.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_invocation_stack.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_island.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_linker.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_mode.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_recorder.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_ref.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_safe.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/core/rh_trampo.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_iterate.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_linker.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_lzma.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/xdl/xdl_util.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/third_party/hde64/hde64.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_a64.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_arm64_inst.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_bridge.c.o CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/arm64/rh_lr_rewrite.c.o
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info
-  LINK_FLAGS = -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments
+  LINK_FLAGS = -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments    -Wl,--gc-sections -Wl,--exclude-libs,ALL
   LINK_LIBRARIES = -llog  -ldl  -lz  -latomic -lm
   OBJECT_DIR = CMakeFiles/rahook_jni.dir
   POST_BUILD = :

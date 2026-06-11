@@ -8,7 +8,7 @@ android {
         minSdk 21
         targetSdk 34
         ndkVersion '25.1.8937393'
-        ndk { abiFilters 'x86_64', 'x86' }
+        ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64' }
         externalNativeBuild {
             cmake { cppFlags "-std=gnu11" }
         }
