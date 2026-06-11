@@ -19,18 +19,6 @@ public class MainActivity extends Activity {
     private boolean hasOp = false;
     private String buf = "0";
 
-    private native int nativeAdd(int a, int b);
-    private native int nativeMul(int a, int b);
-    private native int nativeDouble(int x);
-    private native int nativeTriple(int x);
-    private native int nativeHookAdd();
-    private native int nativeHookMul();
-    private native int nativeHookDouble();
-    private native int nativeUnhookAdd();
-    private native int nativeUnhookMul();
-    private native int nativeUnhookDouble();
-    private native int nativeUnhookAll();
-    private native String nativeVersion();
 
     @Override
     protected void onCreate(Bundle s) {
@@ -89,7 +77,7 @@ public class MainActivity extends Activity {
         restoreAll.setTextSize(14);
         restoreAll.setBackgroundColor(Color.parseColor("#533483"));
         restoreAll.setTextColor(Color.WHITE);
-        restoreAll.setOnClickListener(v -> { nativeUnhookAll(); for (int i = 0; i < 4; i++) { hkOn[i] = false; setHkColor(i); } });
+        restoreAll.setOnClickListener(v -> { RaHook.nativeUnhookAll(); for (int i = 0; i < 4; i++) { hkOn[i] = false; setHkColor(i); } });
         crow.addView(restoreAll, new LinearLayout.LayoutParams(0, dp(40), 1));
 
         root.addView(crow);
@@ -120,15 +108,15 @@ public class MainActivity extends Activity {
             root.addView(row);
         }
 
-        root.addView(tv("#888888", 12, "RaHook " + nativeVersion(), false));
+        root.addView(tv("#888888", 12, "RaHook " + RaHook.nativeVersion(), false));
 
         new Thread(() -> {
             try { Thread.sleep(200); } catch (Exception e) {}
             runOnUiThread(() -> {
-                int r = nativeAdd(3, 4);
-                int m = nativeMul(5, 6);
-                int d = nativeDouble(10);
-                int t = nativeTriple(10);
+                int r = RaHook.nativeAdd(3, 4);
+                int m = RaHook.nativeMul(5, 6);
+                int d = RaHook.nativeDouble(10);
+                int t = RaHook.nativeTriple(10);
                 display.setText("add=" + r + " mul=" + m + "\ndbl=" + d + " tri=" + t);
             });
         }).start();
@@ -156,9 +144,9 @@ public class MainActivity extends Activity {
 
     private int calc(char o, int a, int b) {
         switch (o) {
-            case '+': return nativeAdd(a, b);
+            case '+': return RaHook.nativeAdd(a, b);
             case '-': return a - b;
-            case 'x': return nativeMul(a, b);
+            case 'x': return RaHook.nativeMul(a, b);
             case '/': return b == 0 ? 0 : a / b;
             default: return 0;
         }
@@ -186,15 +174,15 @@ public class MainActivity extends Activity {
     private void toggleHook(int i) {
         try {
             if (hkOn[i]) {
-                if (i == 0) nativeUnhookAdd();
-                else if (i == 1) nativeUnhookMul();
-                else if (i == 2) nativeUnhookDouble();
-                else nativeUnhookDouble();
+                if (i == 0) RaHook.nativeUnhookAdd();
+                else if (i == 1) RaHook.nativeUnhookMul();
+                else if (i == 2) RaHook.nativeUnhookDouble();
+                else RaHook.nativeUnhookDouble();
             } else {
                 int r = 0;
-                if (i == 0) r = nativeHookAdd();
-                else if (i == 1) r = nativeHookMul();
-                else if (i == 2) r = nativeHookDouble();
+                if (i == 0) r = RaHook.nativeHookAdd();
+                else if (i == 1) r = RaHook.nativeHookMul();
+                else if (i == 2) r = RaHook.nativeHookDouble();
                 if (r == 0) { Toast.makeText(this, "hook fail", Toast.LENGTH_SHORT).show(); return; }
             }
             hkOn[i] = !hkOn[i];
