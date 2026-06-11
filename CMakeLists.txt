@@ -59,15 +59,21 @@ target_link_options(rahook PRIVATE
     -Wl,-z,max-page-size=16384)
 target_link_libraries(rahook log dl z)
 
-option(BUILD_TESTS "Build test suite" OFF)
+option(BUILD_TESTS "Build test suite" ON)
+
 if(BUILD_TESTS)
     enable_testing()
     include_directories(tests)
-    set(TEST_LIBS rahook log dl pthread z)
-    foreach(TEST_NAME test_core test_mode test_api test_concurrent test_safety)
+
+    set(TEST_LIST
+        test_core test_mode test_api test_concurrent test_safety
+        test_stress test_perf test_bytesig test_memory test_regress
+    )
+
+    foreach(TEST_NAME ${TEST_LIST})
         add_executable(${TEST_NAME} tests/${TEST_NAME}.c)
         target_include_directories(${TEST_NAME} PRIVATE . core tests third_party/xdl third_party/bsd)
-        target_link_libraries(${TEST_NAME} ${TEST_LIBS})
+        target_link_libraries(${TEST_NAME} rahook log dl pthread z)
         add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
     endforeach()
 endif()

@@ -26,7 +26,7 @@ total_pass=0
 total_fail=0
 total_skip=0
 
-for test in test_core test_mode test_api test_concurrent test_safety; do
+for test in test_core test_mode test_api test_concurrent test_safety test_bytesig test_memory test_stress; do
     echo "=== $test ==="
     gcc -w $BASE_FLAGS -D_GNU_SOURCE -DRH_ARCH_X86_64=1 $INCLUDES \
         -o build/$test tests/$test.c $SRC $LIBS

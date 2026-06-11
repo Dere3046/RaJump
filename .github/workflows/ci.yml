@@ -1,0 +1,91 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  host-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: |
+          mkdir build
+          for test in test_core test_mode test_api test_concurrent test_safety \
+                      test_stress test_perf test_bytesig test_memory test_regress; do
+            gcc -w -O2 -std=gnu11 -no-pie -D_GNU_SOURCE -DRH_ARCH_X86_64=1 \
+              -I. -Icore -Iarch/x86_64 -Iarch/x86 -Itests \
+              -Ithird_party/xdl -Ithird_party/xdl/android \
+              -Ithird_party/bsd -Ithird_party/hde64 \
+              -o build/$test tests/$test.c \
+              core/rh_ref.c core/rh_safe.c core/rh_trampo.c core/rh_island.c \
+              core/rh_linker.c core/rh_hub.c core/rh_mode.c core/rh_recorder.c \
+              core/rh_bytesig.c core/rh_deflector.c core/rh_invocation_stack.c \
+              arch/x86_64/rh_x64.c arch/x86_64/rh_x64_inst.c \
+              arch/x86/rh_ia32.c arch/x86/rh_x86_inst.c \
+              third_party/xdl/xdl.c third_party/xdl/xdl_iterate.c \
+              third_party/xdl/xdl_linker.c third_party/xdl/xdl_lzma.c \
+              third_party/xdl/xdl_util.c third_party/hde64/hde64.c rahook.c \
+              -lpthread -ldl -lz
+          done
+      - name: test
+        run: |
+          pass=0 fail=0
+          for test in test_core test_mode test_api test_concurrent test_safety \
+                      test_stress test_perf test_bytesig test_memory test_regress; do
+            echo "=== $test ==="
+            timeout 30 build/$test 2>&1 | tail -2
+            if [ $? -eq 0 ]; then pass=$((pass+1)); else fail=$((fail+1)); fi
+            echo "---"
+          done
+          echo "$pass passed, $fail failed"
+          [ $fail -eq 0 ] || exit 1
+
+  cross-compile:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        abi: [arm64-v8a, armeabi-v7a, x86, x86_64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup NDK
+        run: |
+          wget -q https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
+          unzip -q android-ndk-r27c-linux.zip
+          echo "NDK=$PWD/android-ndk-r27c" >> $GITHUB_ENV
+      - name: cross-compile ${{ matrix.abi }}
+        run: |
+          case ${{ matrix.abi }} in
+            arm64-v8a)
+              TRIPLE=aarch64-linux-android21
+              DEF=-DRH_ARCH_ARM64=1
+              ASRC="arch/arm64/rh_a64.c arch/arm64/rh_arm64_inst.c"
+              AINC="-Iarch/arm64" ;;
+            armeabi-v7a)
+              TRIPLE=armv7a-linux-androideabi21
+              DEF=-DRH_ARCH_ARM=1
+              ASRC="arch/arm/rh_a32.c arch/arm/rh_t16.c arch/arm/rh_t32.c arch/arm/rh_txx.c arch/arm/rh_arm_inst.c"
+              AINC="-Iarch/arm" ;;
+            x86)
+              TRIPLE=i686-linux-android21
+              DEF=-DRH_ARCH_X86=1
+              ASRC="arch/x86/rh_ia32.c arch/x86/rh_x86_inst.c"
+              AINC="-Iarch/x86" ;;
+            x86_64)
+              TRIPLE=x86_64-linux-android21
+              DEF=-DRH_ARCH_X86_64=1
+              ASRC="arch/x86_64/rh_x64.c arch/x86_64/rh_x64_inst.c"
+              AINC="-Iarch/x86_64" ;;
+          esac
+          $NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/clang \
+            --target=$TRIPLE -DANDROID -D_GNU_SOURCE \
+            -std=gnu11 -O2 -fPIC -shared $DEF \
+            -I. -Icore $AINC -Ithird_party/xdl -Ithird_party/bsd -Ithird_party/hde64 \
+            -o librahook.so rahook.c \
+            core/rh_ref.c core/rh_safe.c core/rh_trampo.c core/rh_island.c \
+            core/rh_linker.c core/rh_hub.c core/rh_mode.c core/rh_recorder.c \
+            core/rh_bytesig.c core/rh_deflector.c core/rh_invocation_stack.c \
+            $ASRC third_party/xdl/xdl.c third_party/xdl/xdl_iterate.c \
+            third_party/xdl/xdl_linker.c third_party/xdl/xdl_lzma.c \
+            third_party/xdl/xdl_util.c \
+            -llog -ldl -lz -lc
+          ls -la librahook.so && echo "RAHOOK BUILD OK: ${{ matrix.abi }}"
