@@ -33,7 +33,8 @@ jobs:
           for test in test_core test_mode test_api test_concurrent test_safety \
                       test_stress test_perf test_bytesig test_memory test_regress; do
             echo "=== $test ==="
-            timeout 30 build/$test 2>&1 | tail -2
+            result=$(timeout 30 build/$test 2>&1)
+            echo "$result" | tail -2
             echo "$result" | grep -q "0 failed" || fail=1
           done
           exit $fail
