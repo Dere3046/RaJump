@@ -1,7 +1,5 @@
 build/
-*.o
-*.so
-*.a
-*.exe
-__pycache__/
-.cache/
+.gradle/
+app/.cxx/
+app/build/
+local.properties
