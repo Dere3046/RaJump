@@ -1,3 +1,0 @@
-/home/Dere3046/code/RaJump/RaJump_p/app/.cxx/Debug/1y3x5g3s/x86/CMakeFiles/rahook_jni.dir
-/home/Dere3046/code/RaJump/RaJump_p/app/.cxx/Debug/1y3x5g3s/x86/CMakeFiles/edit_cache.dir
-/home/Dere3046/code/RaJump/RaJump_p/app/.cxx/Debug/1y3x5g3s/x86/CMakeFiles/rebuild_cache.dir
