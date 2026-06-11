@@ -28,3 +28,5 @@
 142	373	1781147994257714913	CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/rahook.c.o	1f1e256143846dde
 213	381	1781147994269714913	CMakeFiles/rahook_jni.dir/home/Dere3046/code/RaJump/RaJump_p/arch/x86_64/rh_x64_inst.c.o	9a16ef89eb766a9f
 381	408	1781147994293714913	../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.so	bdad02c784efc81f
+1	72	1781149615165713888	CMakeFiles/rahook_jni.dir/src/main/cpp/rahook_jni.c.o	3738f9f747c71679
+73	109	1781149615201713888	../../../../build/intermediates/cxx/Debug/1y3x5g3s/obj/x86_64/librahook_jni.so	bdad02c784efc81f

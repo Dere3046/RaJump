@@ -200,5 +200,6 @@ Java_rahook_RaHook_nativeRunTests(JNIEnv *env, jclass clazz) {
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     (void)vm; (void)reserved;
+    rahook_init();
     return RAHOOK_JNI_VERSION;
 }
