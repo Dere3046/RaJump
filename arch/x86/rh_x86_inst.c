@@ -77,30 +77,18 @@ int rh_x86_inst_hook(rh_x86_inst_t *inst, void *target, void *replace, void **or
         (uintptr_t)target, (uintptr_t)enter_mem);
     inst->enter = enter_mem;
 
-    /* patch target */
+    /* patch target — Dobby-style: mprotect(RWX) → memcpy → mprotect(RX) */
     {
-        int rh_safe_write_ok = 0;
-        rh_sig_jmp_t __sj;
-        if (0 == rh_sig_setjmp(&__sj, SIGSEGV, -1)) {
-            if (mprotect((void *)((uintptr_t)target & ~0xFFFUL), 4096,
-                         PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-                rh_sig_exit(&__sj);
-                munmap(enter_mem, enter_max);
-                return -1;
-            }
-            memcpy(target, inst->exit, inst->backup_len);
-            *origin = inst->enter;
-            rh_safe_write_ok = 1;
-        }
-        rh_sig_exit(&__sj);
-        if (!rh_safe_write_ok) {
+        uintptr_t page = (uintptr_t)target & ~0xFFFUL;
+        if (mprotect((void *)page, 4096, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
             munmap(enter_mem, enter_max);
             return -1;
         }
+        memcpy(target, inst->exit, inst->backup_len);
+        mprotect((void *)page, 4096, PROT_READ | PROT_EXEC);
+        __builtin___clear_cache(target, (uint8_t *)target + inst->backup_len);
     }
-
-    return 0;
-
+    *origin = inst->enter;
     return 0;
 }
 

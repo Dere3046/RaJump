@@ -31,10 +31,7 @@ int rh_x64_inst_hook(rh_x64_inst_t *inst, void *target, void *replace, void **or
     uint8_t *tgt = (uint8_t *)target;
     int cet_skip = 0;
 
-    if (is_cet_endbr(tgt)) {
-        cet_skip = 4;
-        tgt += 4;
-    }
+    if (is_cet_endbr(tgt)) { cet_skip = 4; tgt += 4; }
 
     size_t total = 0;
     while (total < 5) {
@@ -54,7 +51,6 @@ int rh_x64_inst_hook(rh_x64_inst_t *inst, void *target, void *replace, void **or
         for (size_t i = 5; i < total && i < sizeof(inst->exit); i++)
             inst->exit[i] = 0x90;
     } else {
-        /* 6-byte FF 25 <disp32> + 8-byte forward stub */
         if (total < 6) {
             while (total < 6) {
                 hde64s hs2;
@@ -69,14 +65,12 @@ int rh_x64_inst_hook(rh_x64_inst_t *inst, void *target, void *replace, void **or
             tp - 0x7FFFFFFFLL, tp + 0x7FFFFFFFLL);
         if (stub_addr) {
             *(uintptr_t *)stub_addr = (uintptr_t)replace;
-            int32_t disp = (int32_t)(stub_addr - (tp + 6));
-            inst->exit[0] = 0xFF;
-            inst->exit[1] = 0x25;
-            *(int32_t *)(inst->exit + 2) = disp;
+            int32_t d = (int32_t)(stub_addr - (tp + 6));
+            inst->exit[0] = 0xFF; inst->exit[1] = 0x25;
+            *(int32_t *)(inst->exit + 2) = d;
             for (size_t i = 6; i < total && i < sizeof(inst->exit); i++)
                 inst->exit[i] = 0x90;
         } else {
-            /* fallback: MOVABS RAX, imm64; JMP RAX (12 bytes) */
             if (total < 12) {
                 while (total < 12) {
                     hde64s hs2;
@@ -87,58 +81,39 @@ int rh_x64_inst_hook(rh_x64_inst_t *inst, void *target, void *replace, void **or
                 }
             }
             size_t off = 0;
-            inst->exit[off++] = 0x48;
-            inst->exit[off++] = 0xB8;
+            inst->exit[off++] = 0x48; inst->exit[off++] = 0xB8;
             *(uint64_t *)(inst->exit + off) = (uint64_t)replace; off += 8;
-            inst->exit[off++] = 0xFF;
-            inst->exit[off++] = 0xE0;
+            inst->exit[off++] = 0xFF; inst->exit[off++] = 0xE0;
             for (; off < total && off < sizeof(inst->exit); off++)
                 inst->exit[off] = 0x90;
         }
     }
     inst->backup_len = total;
-
     memcpy(inst->backup, tgt, inst->backup_len);
 
-    size_t enter_prefix = (size_t)cet_skip;
-    size_t enter_max = enter_prefix + inst->backup_len * 6 + 32;
-    uintptr_t enter_addr = rh_trampo_alloc_near_3tier(
-        rh_trampo_get_global(), enter_max,
-        tp - 0x7FFFFFFFLL, tp + 0x7FFFFFFFLL);
-    if (!enter_addr) return -1;
-    void *enter_mem = (void *)enter_addr;
-
+    // Dobby-style: allocate enter trampoline from generic pool
+    size_t enter_max = inst->backup_len * 6 + 32;
+    void *enter_mem = mmap(NULL, enter_max, PROT_READ | PROT_WRITE | PROT_EXEC,
+                           MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (enter_mem == MAP_FAILED) return -1;
     uint8_t *enter_buf = (uint8_t *)enter_mem;
 
-    if (cet_skip)
-        memcpy(enter_buf, (uint8_t *)target, 4);
-
     inst->enter_size = rh_x64_relocate_instructions(
-        inst->backup, enter_buf + enter_prefix, inst->backup_len,
-        (uintptr_t)tgt, (uintptr_t)(enter_buf + enter_prefix));
-    inst->enter_size += enter_prefix;
+        inst->backup, enter_buf, inst->backup_len,
+        (uintptr_t)tgt, (uintptr_t)enter_buf);
     inst->enter = enter_buf;
 
-    {
-        int rh_safe_write_ok = 0;
-        rh_sig_jmp_t __sj;
-        if (0 == rh_sig_setjmp(&__sj, SIGSEGV, -1)) {
-            uintptr_t page = (uintptr_t)tgt & ~0xFFFUL;
-            if (mprotect((void *)page, 4096, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-                rh_sig_exit(&__sj);
-                rh_trampo_free(rh_trampo_get_global(), (uintptr_t)enter_buf, enter_max);
-                return -1;
-            }
-            memcpy(tgt, inst->exit, inst->backup_len);
-            *origin = inst->enter;
-            rh_safe_write_ok = 1;
-        }
-        rh_sig_exit(&__sj);
-        if (!rh_safe_write_ok) {
-            rh_trampo_free(rh_trampo_get_global(), (uintptr_t)enter_buf, enter_max);
-            return -1;
-        }
+    // Dobby-style: mprotect(RWX) → memcpy → mprotect(RX)
+    uintptr_t page = (uintptr_t)tgt & ~0xFFFUL;
+    if (mprotect((void *)page, 4096, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        munmap(enter_buf, enter_max);
+        return -1;
     }
+    memcpy(tgt, inst->exit, inst->backup_len);
+    mprotect((void *)page, 4096, PROT_READ | PROT_EXEC);
+    __builtin___clear_cache(tgt, tgt + inst->backup_len);
+
+    *origin = inst->enter;
     return 0;
 }
 
@@ -155,9 +130,8 @@ int rh_x64_inst_unhook(rh_x64_inst_t *inst, void *target)
     mprotect((void *)((uintptr_t)tgt & ~0xFFFUL), 4096, PROT_READ | PROT_EXEC);
 
     if (inst->enter) {
-        size_t cet_skip_inner = is_cet_endbr((uint8_t *)target) ? 4 : 0;
-        size_t free_size = cet_skip_inner + inst->backup_len * 6 + 32;
-        rh_trampo_free(rh_trampo_get_global(), (uintptr_t)inst->enter, free_size);
+        size_t free_size = inst->backup_len * 6 + 32;
+        munmap(inst->enter, free_size);
     }
 
     if (inst->island_exit.addr) {

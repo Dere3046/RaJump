@@ -18,6 +18,8 @@ static int native_test_mul(int a, int b) { return a * b; }
 static int native_test_double(int x) { return x * 2; }
 static int native_test_triple(int x) { return x * 3; }
 
+static size_t stub_strlen(const char *s) { (void)s; return 999; }
+
 static void *g_hook_add = NULL;
 static void *g_hook_mul = NULL;
 static void *g_hook_double = NULL;
@@ -149,11 +151,10 @@ Java_rahook_RaHook_nativeRunTests(JNIEnv *env, jclass clazz) {
 
     off += snprintf(buf + off, sizeof(buf) - off, "\nhook libc strlen:\n");
     typedef size_t (*strlen_t)(const char*);
-    strlen_t real_strlen = (strlen_t)raknob_dlsym(NULL, "strlen");
+    strlen_t real_strlen = (strlen_t)rahook_dlsym(NULL, "strlen");
     if (real_strlen) {
         off += snprintf(buf + off, sizeof(buf) - off, "  strlen(\"hello\")=%zu\n", real_strlen("hello"));
-        static size_t stub_strlen(const char *s) { (void)s; return 999; }
-        void *sh = rahook_quick((void*)real_strlen, (void*)stub_strlen, NULL);
+        void *sh = rahook((void*)real_strlen, (void*)stub_strlen, NULL, RAHOOK_FLAG_UNIQUE);
         if (sh) {
             size_t hooked = ((strlen_t)real_strlen)("hello");
             off += snprintf(buf + off, sizeof(buf) - off, "  hooked strlen(\"hello\")=%zu (expect 999)\n", hooked);
