@@ -127,7 +127,7 @@ static rh_hub_t *rh_find_or_create_hub(void *target) {
 
 static int rh_arch_hook(rh_entry_t *e, void *target, void *replace) {
 #if defined(RH_ARCH_ARM64)
-    return rh_arm64_inst_hook(&e->inst, target, replace, &e->origin, false);
+    return rh_arm64_inst_hook(&e->inst, target, replace, &e->origin);
 #elif defined(RH_ARCH_ARM)
     return rh_arm_inst_hook(&e->inst, target, replace, &e->origin);
 #elif defined(RH_ARCH_X86)
@@ -321,9 +321,9 @@ void *rahook(void *target, void *replace, void **origin, uint32_t flags) {
 
             int r;
 #if defined(RH_ARCH_ARM64)
-            r = rh_arm64_inst_hook(&e->inst, target, trampo_target, NULL, false);
+            r = rh_arm64_inst_hook(&e->inst, target, trampo_target, &e->origin);
 #elif defined(RH_ARCH_ARM)
-            r = rh_arm_inst_hook(&e->inst, target, trampo_target, NULL);
+            r = rh_arm_inst_hook(&e->inst, target, trampo_target, &e->origin);
 #elif defined(RH_ARCH_X86)
             r = rh_x86_inst_hook(&e->inst, target, trampo_target, NULL);
 #elif defined(RH_ARCH_X86_64)
@@ -341,8 +341,8 @@ void *rahook(void *target, void *replace, void **origin, uint32_t flags) {
     }
 #else
         mode = RH_MODE_UNIQUE;
-#endif
     }
+#endif
     uintptr_t got_slot;
     if (rh_plt_is_stub((uintptr_t)target, &got_slot)) {
         if (origin) *origin = *(void **)got_slot;

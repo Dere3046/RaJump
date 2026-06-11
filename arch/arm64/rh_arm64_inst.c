@@ -337,7 +337,7 @@ static int rh_arm64_inst_hook_without_island(rh_arm64_inst_t *self, uintptr_t ta
 }
 #endif
 
-int rh_arm64_inst_hook(rh_arm64_inst_t *self, uintptr_t target_addr, rh_addr_info_t *addr_info, uintptr_t new_addr,
+int rh_arm64_inst_hook_full(rh_arm64_inst_t *self, uintptr_t target_addr, rh_addr_info_t *addr_info, uintptr_t new_addr,
                  bool is_to_interceptor, rh_arm64_inst_set_orig_addr_t set_orig_addr, void *set_orig_addr_arg) {
   self->enter = rh_enter_alloc();
   if (0 == self->enter) return RAHOOK_ERRNO_HOOK_ENTER;
@@ -501,4 +501,21 @@ void rh_arm64_inst_build_glue_launcher(void *buf, void *ctx) {
   b[4] = (uintptr_t)rahook_interceptor_glue >> 32u;
   b[5] = (uintptr_t)ctx & 0xFFFFFFFF;
   b[6] = (uintptr_t)ctx >> 32u;
+}
+
+// simple wrapper matching the public rahook API
+int rh_arm64_inst_hook(rh_arm64_inst_t *self, void *target, void *replace, void **origin)
+{
+    rh_addr_info_t addr_info;
+    memset(&addr_info, 0, sizeof(addr_info));
+    addr_info.is_sym_addr = true;
+    addr_info.is_proc_start = true;
+
+    uintptr_t result_origin = 0;
+    int r = rh_arm64_inst_hook_full(self, (uintptr_t)target, &addr_info, (uintptr_t)replace,
+                                     false, NULL, NULL);
+    if (r == 0 && self->enter)
+        result_origin = self->enter;
+    if (origin) *origin = (void *)result_origin;
+    return r;
 }

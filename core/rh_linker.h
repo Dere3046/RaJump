@@ -1,10 +1,22 @@
 #pragma once
+#include <link.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <dlfcn.h>
 
 #include "rh_config.h"
+
+typedef struct {
+    void *dli_fbase;
+    char *dli_fname;
+    void *dli_saddr;
+    size_t dli_ssize;
+    const ElfW(Phdr) *dlpi_phdr;
+    size_t dlpi_phnum;
+    bool is_sym_addr;
+    bool is_proc_start;
+} rh_addr_info_t;
 
 typedef struct {
     void *start;

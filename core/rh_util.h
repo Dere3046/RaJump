@@ -34,7 +34,9 @@
 #define rh_util_is_within(a, start, end) ((uintptr_t)(a) >= (uintptr_t)(start) && (uintptr_t)(a) <= (uintptr_t)(end))
 
 static size_t rh_page_size = 0;
+#ifndef PAGE_SIZE
 #define PAGE_SIZE    rh_page_size
+#endif
 #define RH_PAGE_SIZE rh_page_size
 
 static int (*rh_real_mprotect)(void *, size_t, int) = NULL;
@@ -84,5 +86,9 @@ static inline int rh_util_write_inst(void *addr, const void *code, size_t size) 
 
 static inline void rh_util_write_and_flush(uintptr_t addr, const void *buf, size_t size) {
     memcpy((void *)addr, buf, size);
+    rh_util_cache_flush(addr, size);
+}
+
+static inline void rh_util_clear_cache(uintptr_t addr, size_t size) {
     rh_util_cache_flush(addr, size);
 }

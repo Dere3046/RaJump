@@ -192,7 +192,7 @@ static int rh_arm_inst_thumb_rewrite(rh_arm_inst_t *self, uintptr_t target_addr,
       self->rewritten_len += inst_len;
 
     
-      RH_LOG_INFO("thumb rewrite: offset %zu, pc %" PRIxPTR, rinfo.buf_offset, pc);
+      RH_LOG_DEBUG("thumb rewrite: offset %zu, pc %" PRIxPTR, rinfo.buf_offset, pc);
       size_t len;
 
       // LR rewrite: intercept MOV Rd, LR in dlopen thunk
@@ -236,7 +236,7 @@ lr_rewrite_done:
       pc += inst_len;
     }
   }
-  RH_LOG_INFO("thumb rewrite: len %zu to %zu", self->rewritten_len, rinfo.buf_offset);
+  RH_LOG_DEBUG("thumb rewrite: len %zu to %zu", self->rewritten_len, rinfo.buf_offset);
 
   // absolute jump back to remaining original instructions (fill in enter)
   uintptr_t resume_addr = RH_UTIL_SET_BIT0(target_addr + self->rewritten_len);
@@ -312,7 +312,7 @@ static bool rh_arm_inst_thumb_is_long_enough(rh_arm_inst_t *self, uintptr_t targ
     if (0 != dlinfo.dli_saddr) return false;
 
     // trust here is useless alignment data
-    RH_LOG_INFO("thumb detect tail aligned: OK %" PRIxPTR, target_addr);
+    RH_LOG_DEBUG("thumb detect tail aligned: OK %" PRIxPTR, target_addr);
     return true;
   }
 #endif
@@ -365,7 +365,7 @@ static int rh_arm_inst_thumb_reloc_with_island(rh_arm_inst_t *self, uintptr_t ta
   self->island_exit = new_island_exit;
   memcpy(self->exit, new_exit, self->backup_len);
 
-  RH_LOG_INFO("thumb: %shook (with island) OK. target %" PRIxPTR " -> island-exit %" PRIxPTR
+  RH_LOG_DEBUG("thumb: %shook (with island) OK. target %" PRIxPTR " -> island-exit %" PRIxPTR
               " -> new %" PRIxPTR " -> enter %" PRIxPTR " -> resume %" PRIxPTR,
               is_rehook ? "re-" : "", RH_UTIL_SET_BIT0(target_addr), self->island_exit.addr, new_addr,
               RH_UTIL_SET_BIT0(self->enter), RH_UTIL_SET_BIT0(target_addr + self->rewritten_len));
@@ -407,7 +407,7 @@ static int rh_arm_inst_thumb_reloc_without_island(rh_arm_inst_t *self, uintptr_t
   if (0 != (r = rh_util_write_inst(target_addr, new_exit, self->backup_len))) return r;
   memcpy(self->exit, new_exit, self->backup_len);
 
-  RH_LOG_INFO("thumb: %shook (without island) OK. target %" PRIxPTR " -> new %" PRIxPTR " -> enter %" PRIxPTR
+  RH_LOG_DEBUG("thumb: %shook (without island) OK. target %" PRIxPTR " -> new %" PRIxPTR " -> enter %" PRIxPTR
               " -> resume %" PRIxPTR,
               is_rehook ? "re-" : "", RH_UTIL_SET_BIT0(target_addr), new_addr, RH_UTIL_SET_BIT0(self->enter),
               RH_UTIL_SET_BIT0(target_addr + self->rewritten_len));
@@ -525,7 +525,7 @@ static int rh_arm_inst_arm_reloc_with_island(rh_arm_inst_t *self, uintptr_t targ
   self->island_exit = new_island_exit;
   memcpy(self->exit, new_exit, self->backup_len);
 
-  RH_LOG_INFO("a32: %shook (with island) OK. target %" PRIxPTR " -> island-exit %" PRIxPTR " -> new %" PRIxPTR
+  RH_LOG_DEBUG("a32: %shook (with island) OK. target %" PRIxPTR " -> island-exit %" PRIxPTR " -> new %" PRIxPTR
               " -> enter %" PRIxPTR " -> resume %" PRIxPTR,
               is_rehook ? "re-" : "", target_addr, self->island_exit.addr, new_addr, self->enter,
               target_addr + self->backup_len);
@@ -579,7 +579,7 @@ static int rh_arm_inst_arm_reloc_without_island(rh_arm_inst_t *self, uintptr_t t
   if (0 != (r = rh_util_write_inst(target_addr, new_exit, self->backup_len))) return r;
   memcpy(self->exit, new_exit, self->backup_len);
 
-  RH_LOG_INFO("a32: %shook (without island) OK. target %" PRIxPTR " -> new %" PRIxPTR " -> enter %" PRIxPTR
+  RH_LOG_DEBUG("a32: %shook (without island) OK. target %" PRIxPTR " -> new %" PRIxPTR " -> enter %" PRIxPTR
               " -> resume %" PRIxPTR,
               is_rehook ? "re-" : "", target_addr, new_addr, self->enter, target_addr + self->backup_len);
   return 0;
@@ -597,7 +597,7 @@ static int rh_arm_inst_arm_hook_without_island(rh_arm_inst_t *self, uintptr_t ta
 }
 #endif
 
-int rh_arm_inst_hook(rh_arm_inst_t *self, uintptr_t target_addr, rh_addr_info_t *addr_info, uintptr_t new_addr,
+int rh_arm_inst_hook_full(rh_arm_inst_t *self, uintptr_t target_addr, rh_addr_info_t *addr_info, uintptr_t new_addr,
                  bool is_to_interceptor, rh_arm_inst_set_orig_addr_t set_orig_addr, void *set_orig_addr_arg) {
   (void)is_to_interceptor;
 
@@ -708,7 +708,7 @@ int rh_arm_inst_unhook(rh_arm_inst_t *self, uintptr_t target_addr, uintptr_t loa
   // free memory space for enter
   rh_enter_free(self->enter);
 
-  RH_LOG_INFO("%s: unhook OK. target %" PRIxPTR, is_thumb ? "thumb" : "a32", target_addr);
+  RH_LOG_DEBUG("%s: unhook OK. target %" PRIxPTR, is_thumb ? "thumb" : "a32", target_addr);
   return 0;
 }
 
@@ -720,7 +720,7 @@ void rh_arm_inst_free_after_dlclose(rh_arm_inst_t *self, uintptr_t target_addr) 
   rh_enter_free(self->enter);
 
   bool is_thumb = RH_UTIL_IS_THUMB(target_addr);
-  RH_LOG_INFO("%s: free_after_dlclose OK. target %" PRIxPTR, is_thumb ? "thumb" : "a32", target_addr);
+  RH_LOG_DEBUG("%s: free_after_dlclose OK. target %" PRIxPTR, is_thumb ? "thumb" : "a32", target_addr);
 }
 
 extern void rahook_interceptor_glue(void);
@@ -746,4 +746,21 @@ void rh_arm_inst_build_glue_launcher(void *buf, void *ctx) {
   else
     b[3] = (uint32_t)rahook_interceptor_glue;
   b[4] = (uint32_t)ctx;
+}
+
+// simple wrapper matching the public rahook API
+int rh_arm_inst_hook(rh_arm_inst_t *self, void *target, void *replace, void **origin)
+{
+    rh_addr_info_t addr_info;
+    memset(&addr_info, 0, sizeof(addr_info));
+    addr_info.is_sym_addr = true;
+    addr_info.is_proc_start = true;
+
+    uintptr_t result_origin = 0;
+    int r = rh_arm_inst_hook_full(self, (uintptr_t)target, &addr_info, (uintptr_t)replace,
+                                    false, NULL, NULL);
+    if (r == 0 && self->enter)
+        result_origin = self->enter;
+    if (origin) *origin = (void *)result_origin;
+    return r;
 }

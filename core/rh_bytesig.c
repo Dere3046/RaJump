@@ -21,8 +21,12 @@
 #define android_get_device_api_level() 21
 #endif
 
+#ifndef __predict_false
 #define __predict_false(x)  __builtin_expect(!!(x), 0)
+#endif
+#ifndef __predict_true
 #define __predict_true(x)   __builtin_expect(!!(x), 1)
+#endif
 
 #define RH_BYTESIG_SIGNAL_MAX NSIG
 #define RH_BYTESIG_TID_MAX 256

@@ -9,6 +9,9 @@
 #define RAHOOK_ERRNO_NOT_FOUND      -2
 #define RAHOOK_ERRNO_NO_MEMORY      -3
 #define RAHOOK_ERRNO_HOOK_CFG_UNSAFE -11
+#define RAHOOK_ERRNO_HOOK_ISLAND_REWRITE -12
+#define RAHOOK_ERRNO_HOOK_ENTER -13
+#define RAHOOK_ERRNO_HOOK_SYMSZ -14
 
 // likely/unlikely
 #define __predict_true(x)   __builtin_expect(!!(x), 1)

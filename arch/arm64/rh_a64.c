@@ -147,7 +147,7 @@ static uintptr_t rh_a64_fix_addr(uintptr_t addr, rh_a64_rewrite_info_t *rinfo) {
       offset += rinfo->inst_lens[i];
     }
     uintptr_t fixed_addr = (uintptr_t)rinfo->buf + rinfo->inst_prolog_len + offset;
-    RH_LOG_INFO("a64 rewrite: fix addr %" PRIxPTR " -> %" PRIxPTR, addr, fixed_addr);
+    RH_LOG_DEBUG("a64 rewrite: fix addr %" PRIxPTR " -> %" PRIxPTR, addr, fixed_addr);
     return fixed_addr;
   }
 
@@ -172,7 +172,7 @@ static int rh_a64_build_island_rewrite(uintptr_t addr, rh_a64_rewrite_info_t *ri
   rh_a64_restore_ip((uint32_t *)rinfo->island_rewrite->addr);
   rh_a64_relative_jump((uint32_t *)(rinfo->island_rewrite->addr + 4), addr, rinfo->island_rewrite->addr + 4);
   rh_util_clear_cache(rinfo->island_rewrite->addr, rinfo->island_rewrite->size);
-  RH_LOG_INFO("a64 rewrite: branch island %" PRIxPTR " -> %" PRIxPTR, rinfo->island_rewrite->addr + 4, addr);
+  RH_LOG_DEBUG("a64 rewrite: branch island %" PRIxPTR " -> %" PRIxPTR, rinfo->island_rewrite->addr + 4, addr);
   return 0;
 }
 
@@ -325,7 +325,7 @@ static size_t rh_a64_rewrite_tb(uint32_t *buf, uint32_t inst, uintptr_t pc, rh_a
 
 size_t rh_a64_rewrite(uint32_t *buf, uint32_t inst, uintptr_t pc, rh_a64_rewrite_info_t *rinfo) {
   rh_a64_type_t type = rh_a64_get_type(inst);
-  RH_LOG_INFO("a64 rewrite: type %d, inst %" PRIx32, type, inst);
+  RH_LOG_DEBUG("a64 rewrite: type %d, inst %" PRIx32, type, inst);
 
   if (type == B || type == B_COND || type == BL)
     return rh_a64_rewrite_b(buf, inst, pc, type, rinfo);
