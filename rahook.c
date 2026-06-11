@@ -70,6 +70,12 @@ static bool             g_bytesig_ok    = false;
 static rh_trampo_t      g_trampo;
 static int              g_errno         = RAHOOK_ERR_OK;
 static bool             g_disabled      = false;
+static inline bool rh_is_disabled(void) {
+    return __atomic_load_n(&g_disabled, __ATOMIC_RELAXED);
+}
+static inline void rh_set_disabled(bool v) {
+    __atomic_store_n(&g_disabled, v, __ATOMIC_RELAXED);
+}
 static bool             g_debug         = false;
 static _Thread_local bool g_thread_ignored = false;
 static bool             g_in_transaction       = false;
@@ -78,6 +84,84 @@ void *g_bridge_enter = NULL;
 void *g_bridge_leave = NULL;
 static rh_entry_t      *g_transaction_entries  = NULL;
 static int              g_transaction_count    = 0;
+
+// ---- target hash map ----
+
+#define RH_TARGET_MAP_SIZE 256
+#define RH_BLOOM_BITS 2048
+
+static struct {
+    void *target;
+    rh_entry_t *entry;
+} g_target_map[RH_TARGET_MAP_SIZE];
+
+static uint8_t g_bloom[RH_BLOOM_BITS / 8];
+
+static uint32_t rh_target_hash(void *addr, int seed) {
+    uint32_t h = (uint32_t)((uintptr_t)addr >> 2);
+    h = (h ^ (h >> 16)) * 0x85EBCA6Bu;
+    return (h ^ seed * 0x9E3779B9u) % RH_TARGET_MAP_SIZE;
+}
+
+static uint32_t rh_bloom_hash(void *addr, int seed) {
+    uint32_t h = (uint32_t)((uintptr_t)addr >> 2);
+    h = (h ^ (h >> 16)) * 0x85EBCA6Bu;
+    return (h ^ seed * 0x9E3779B9u) % RH_BLOOM_BITS;
+}
+
+static void rh_bloom_add(void *addr) {
+    for (int i = 0; i < 4; i++) {
+        uint32_t b = rh_bloom_hash(addr, i);
+        g_bloom[b / 8] |= (1 << (b % 8));
+    }
+}
+
+static int rh_bloom_test(void *addr) {
+    for (int i = 0; i < 4; i++) {
+        uint32_t b = rh_bloom_hash(addr, i);
+        if (!(g_bloom[b / 8] & (1 << (b % 8)))) return 0;
+    }
+    return 1;
+}
+
+static void rh_target_map_insert(rh_entry_t *e) {
+    if (!e || !e->target) return;
+    rh_bloom_add(e->target);
+    uint32_t h = rh_target_hash(e->target, 0);
+    for (int n = 0; n < RH_TARGET_MAP_SIZE; n++, h = (h + 1) % RH_TARGET_MAP_SIZE) {
+        if (!g_target_map[h].target) {
+            g_target_map[h].target = e->target;
+            g_target_map[h].entry = e;
+            return;
+        }
+        if (g_target_map[h].target == e->target) {
+            g_target_map[h].entry = e;
+            return;
+        }
+    }
+}
+
+static void rh_target_map_remove(void *target) {
+    if (!target) return;
+    uint32_t h = rh_target_hash(target, 0);
+    for (int n = 0; n < RH_TARGET_MAP_SIZE; n++, h = (h + 1) % RH_TARGET_MAP_SIZE) {
+        if (g_target_map[h].target == target) {
+            g_target_map[h].target = NULL;
+            g_target_map[h].entry = NULL;
+            return;
+        }
+    }
+}
+
+static rh_entry_t *rh_target_map_lookup(void *target) {
+    if (!target || !rh_bloom_test(target)) return NULL;
+    uint32_t h = rh_target_hash(target, 0);
+    for (int n = 0; n < RH_TARGET_MAP_SIZE; n++, h = (h + 1) % RH_TARGET_MAP_SIZE) {
+        if (!g_target_map[h].target) return NULL;
+        if (g_target_map[h].target == target) return g_target_map[h].entry;
+    }
+    return NULL;
+}
 
 rh_trampo_t *rh_trampo_get_global(void) { return &g_trampo; }
 
@@ -93,9 +177,7 @@ static void rh_entry_free(rh_entry_t *e) {
 }
 
 static rh_entry_t *rh_find_entry_by_target(void *target) {
-    for (rh_entry_t *e = g_entries; e; e = e->next)
-        if (e->active && e->target == target) return e;
-    return NULL;
+    return rh_target_map_lookup(target);
 }
 
 static rh_entry_t *rh_find_hub_entry(void *target) {
@@ -153,6 +235,7 @@ static void rh_entry_register(rh_entry_t *e) {
     pthread_mutex_lock(&g_lock);
     e->next = g_entries;
     g_entries = e;
+    rh_target_map_insert(e);
     pthread_mutex_unlock(&g_lock);
 }
 
@@ -163,12 +246,20 @@ static void rh_entry_unlink(rh_entry_t *e) {
         if (*prev == e) { *prev = e->next; break; }
         prev = &(*prev)->next;
     }
+    rh_target_map_remove(e->target);
+    for (rh_entry_t *cur = g_entries; cur; cur = cur->next) {
+        if (cur->active && cur->target == e->target) {
+            rh_target_map_insert(cur);
+            break;
+        }
+    }
     pthread_mutex_unlock(&g_lock);
 }
 
 int rahook_init(void) {
     if (g_initialized) return 0;
     rh_util_init();
+    rh_region_cache_init();
     rh_trampo_init(&g_trampo, 4096);
     rh_island_init();
 #if defined(RH_ARCH_ARM64)
@@ -266,7 +357,7 @@ void *rahook(void *target, void *replace, void **origin, uint32_t flags) {
         g_errno = RAHOOK_ERR_INVALID_ARG;
         return NULL;
     }
-    if (g_disabled) {
+    if (rh_is_disabled()) {
         g_errno = RAHOOK_ERR_DISABLED;
         return NULL;
     }
@@ -375,12 +466,23 @@ done:
     return e;
 }
 
+static bool rh_is_own_lib(const char *lib_name) {
+    if (!lib_name) return false;
+    Dl_info info;
+    if (dladdr((void *)rahook_init, &info) && info.dli_fname) {
+        if (strstr(lib_name, info.dli_fname)) return true;
+        if (strstr(info.dli_fname, lib_name)) return true;
+    }
+    return false;
+}
+
 void *rahook_symbol(const char *lib, const char *sym, void *replace,
                     void **origin, uint32_t flags) {
     if (!g_initialized || !lib || !sym || !replace) {
         g_errno = RAHOOK_ERR_INVALID_ARG;
         return NULL;
     }
+    if (rh_is_own_lib(lib)) { g_errno = RAHOOK_ERR_INVALID_ARG; return NULL; }
 
     void *handle = rh_dlopen(lib);
     if (!handle) { g_errno = RAHOOK_ERR_NOT_FOUND; return NULL; }
@@ -405,7 +507,6 @@ void *rahook_symbol_callback(const char *lib, const char *sym, void *replace,
         if (cb) cb(RAHOOK_ERR_INVALID_ARG, lib, sym, NULL, NULL, NULL, cb_arg);
         return NULL;
     }
-
     void *handle = rh_dlopen(lib);
     void *target = handle ? rh_dlsym(handle, sym) : NULL;
 
@@ -521,9 +622,9 @@ void rahook_cache_flush(void *addr, size_t size) {
 
 // global disable/enable
 
-bool rahook_get_disable(void) { return g_disabled; }
+bool rahook_get_disable(void) { return rh_is_disabled(); }
 
-void rahook_set_disable(bool disable) { g_disabled = disable; }
+void rahook_set_disable(bool disable) { rh_set_disabled(disable); }
 
 bool rahook_get_debug(void) { return g_debug; }
 
@@ -544,13 +645,39 @@ int rahook_end_transaction(void) {
     g_in_transaction = false;
 
     rh_entry_t *cur = g_transaction_entries;
+    size_t count = 0;
+    while (cur) { count++; cur = cur->next_tx; }
+
+    uintptr_t *pages = calloc(count, sizeof(uintptr_t));
+    if (!pages) return -1;
+    size_t page_count = 0;
+
+    cur = g_transaction_entries;
+    while (cur) {
+        uintptr_t page = (uintptr_t)cur->target & ~0xFFFUL;
+        int dup = 0;
+        for (size_t j = 0; j < page_count; j++)
+            if (pages[j] == page) { dup = 1; break; }
+        if (!dup) pages[page_count++] = page;
+        cur = cur->next_tx;
+    }
+
+    for (size_t i = 0; i < page_count; i++)
+        mprotect((void *)pages[i], 4096, PROT_READ | PROT_WRITE | PROT_EXEC);
+
+    cur = g_transaction_entries;
     while (cur) {
         rh_entry_t *next = cur->next_tx;
         int r = rh_arch_hook(cur, cur->target, cur->replace);
-        if (r != 0) { cur->active = false; }
+        if (r != 0) cur->active = false;
         cur->next_tx = NULL;
         cur = next;
     }
+
+    for (size_t i = 0; i < page_count; i++)
+        mprotect((void *)pages[i], 4096, PROT_READ | PROT_EXEC);
+
+    free(pages);
     g_transaction_entries = NULL;
     g_transaction_count = 0;
     return 0;
